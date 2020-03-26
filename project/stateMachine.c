@@ -6,28 +6,10 @@ int state;
 
 
 void state_machine(){
-    while(1){
-        switch(state){
-            case 1:
-                state_1();
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            default:
-                buzzer_set_period(2000);
-        }
-    }
-
-}
-
-void state_1(){
-    switch(check_switches()){
+    
+    switch(state){
         case 1:
-            state++;
+            state_1();
             break;
         case 2:
             break;
@@ -36,14 +18,41 @@ void state_1(){
         case 4:
             break;
         default:
-            buzzer_set_period(2000);
+            break;
+    }
+}
+
+void state_1(){
+    switch(check_switches()){
+        int timer = 0;
+        case 1:
+            enable_green();
+            led_update();
+            while(timer++ != 125);
+            disable_green();
+            led_update();
+            state++;
+            break;
+        case 2:
+            enable_red();
+            led_update();
+            while(timer++ != 500);
+            disable_red();
+            led_update();
+            state = 0;
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
     }
 
 }
 
 int check_switches(){
-    s1_down? 1:0;
-    s2_down? 2:0;
-    s3_down? 3:0;
-    s4_down? 4:0;
+    if(s1_down) return 1;
+    else if(s2_down) return 2;
+    else if(s3_down) return 3;
+    else if(s4_down) return 4;
+    else return 0;
 }

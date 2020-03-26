@@ -14,8 +14,6 @@ switch_init(){
   P2OUT |= SWITCHES;
   P2DIR &= ~SWITCHES;
   switch_update_interrupt_sense();
-
-  
 }
 
 static char
@@ -25,7 +23,7 @@ switch_update_interrupt_sense(){
   P2IES &= (p2val & ~SWITCHES);
   return p2val;
 }
-
+//interrupt handler for second board
 void
 switch_interrupt_handler(){
   char p2val = switch_update_interrupt_sense();
@@ -33,6 +31,7 @@ switch_interrupt_handler(){
   s2_down = (p2val & S2) ? 0:1;
   s3_down = (p2val & S3) ? 0:1;
   s4_down = (p2val & S4) ? 0:1;
+  switch_state_changed = 1;
 }
 
 void

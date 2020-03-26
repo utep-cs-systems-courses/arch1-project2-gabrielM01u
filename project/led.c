@@ -25,5 +25,29 @@ void led_update()
   }
 }
 
+/**
+ * turns on and off green and red lights
+ **/
+void enable_green()
+{
+  green_on = 1;
+  led_changed = 1;
+}
 
+void disable_green()
+{
+  green_on = 0;
+  led_changed = 1;
+}
 
+void enable_red()
+{
+  red_on = 1;
+  led_changed = 1;
+}
+
+void disable_red()
+{
+  red_on = 0;
+  led_changed = 1;
+}
