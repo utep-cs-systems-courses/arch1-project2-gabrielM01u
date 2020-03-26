@@ -28,6 +28,7 @@ void state_1(){
         case 1:
             enable_green();
             led_update();
+            buzzer_set_period(2200);
             while(timer++ != 125);
             disable_green();
             led_update();
@@ -36,6 +37,7 @@ void state_1(){
         case 2:
             enable_red();
             led_update();
+            buzzer_set_period(1400);
             while(timer++ != 500);
             disable_red();
             led_update();

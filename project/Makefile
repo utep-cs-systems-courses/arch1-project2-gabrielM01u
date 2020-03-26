@@ -10,7 +10,7 @@ AS              = msp430-elf-as
 all: main.elf 
 
 #additional rules for files
-main.elf: ${COMMON_OBJECTS} p2_interrupt_handler.o wdInterruptHandler.o buzzer.o led.o switches.o main.o ../lib/libTimer.a
+main.elf: ${COMMON_OBJECTS} buzzer.o led.o switches.o main.o stateMachines.o ../lib/libTimer.a
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
 load: main.elf
