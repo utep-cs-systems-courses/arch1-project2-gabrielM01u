@@ -1,6 +1,6 @@
 #include <msp430.h>
 #include "switches.h"
-//#include "led.h"
+
 
 char s1_down;
 char s2_down;
@@ -15,7 +15,7 @@ switch_init(){
   P2DIR &= ~SWITCHES;
   switch_update_interrupt_sense();
 
-  led_update(1,1);
+  
 }
 
 static char
