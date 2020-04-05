@@ -51,6 +51,11 @@ void state_1(){
 
 }
 
+/**
+ * int check_switches():
+ *      If a single switch is pressed, will return
+ *      the number of that switch. 
+ **/
 int check_switches(){
     if(s1_down) return 1;
     else if(s2_down) return 2;

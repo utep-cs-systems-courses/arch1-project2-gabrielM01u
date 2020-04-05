@@ -1,7 +1,10 @@
 #include <msp430.h>
 #include "switches.h"
 
-
+/**
+ char sx_down:
+   boolean (0 or 1) indicating if a switch is pressed
+**/
 char s1_down;
 char s2_down;
 char s3_down;
@@ -23,7 +26,8 @@ switch_update_interrupt_sense(){
   P2IES &= (p2val & ~SWITCHES);
   return p2val;
 }
-//interrupt handler for second board
+
+/*  interrupt handler for second board  */
 void
 switch_interrupt_handler(){
   char p2val = switch_update_interrupt_sense();

@@ -22,6 +22,11 @@ void enableWDTInterrupts()
   IE1 |= WDTIE;		   // Enable watchdog interval timer interrupt
 }
 
+void disableWDTInterrupts()
+{
+  IE1 &= ~WDTIE;
+}
+
 
 void timerAUpmode()
 {

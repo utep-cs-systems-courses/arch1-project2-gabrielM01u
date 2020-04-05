@@ -3,6 +3,7 @@
 
 void configureClocks();
 void enableWDTInterrupts();
+void disableWDTInterrupts();
 void timerAUpmode();
 
 #endif
