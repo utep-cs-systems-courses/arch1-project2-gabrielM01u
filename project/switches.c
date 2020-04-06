@@ -30,12 +30,20 @@ switch_update_interrupt_sense(){
 /*  interrupt handler for second board  */
 void
 switch_interrupt_handler(){
+  int s = 0;
   char p2val = switch_update_interrupt_sense();
   s1_down = (p2val & S1) ? 0:1;
   s2_down = (p2val & S2) ? 0:1;
   s3_down = (p2val & S3) ? 0:1;
   s4_down = (p2val & S4) ? 0:1;
   switch_state_changed = 1;
+
+  if(s1_down) s = 1;
+  else if(s2_down) s = 2;
+  else if(s3_down) s = 3;
+  else if(s4_down) s = 4;
+
+  if(s>0) state_machine(s);
 }
 
 void

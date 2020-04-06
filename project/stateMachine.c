@@ -5,61 +5,66 @@
 int state;
 
 
-void state_machine(){
+void state_machine(int s){
     
-    switch(state){
+    switch(s){
         case 1:
             state_1();
             break;
         case 2:
+            state_2();
+            enable_green();
             break;
         case 3:
+            state_3();
             break;
         case 4:
+            state_4();
             break;
         default:
             break;
     }
 }
-
+/**
+ * States
+ **/
 void state_1(){
-    switch(check_switches()){
-        int timer = 0;
-        case 1:
-            enable_green();
-            led_update();
-            buzzer_set_period(2200);
-            while(timer++ != 125);
-            disable_green();
-            led_update();
-            state++;
-            break;
-        case 2:
-            enable_red();
-            led_update();
-            buzzer_set_period(1400);
-            while(timer++ != 500);
-            disable_red();
-            led_update();
-            state = 0;
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-    }
-
+   int timer;
+    enable_green();
+    led_update();
+    buzzer_set_period(2200);
+    while(timer++ != 125);
+    disable_green();
+    buzzer_off();
+    led_update();
 }
 
+void state_2(){
+    int timer;
+    enable_red();
+    led_update();
+    buzzer_set_period(1400);
+    while(timer++ != 500);
+    disable_red();
+    buzzer_off();
+    led_update();
+}
+
+void state_3(){
+    state_1();
+    state_2();
+}
+
+void state_4(){
+    state_2();
+    state_3();
+}
 /**
- * int check_switches():
- *      If a single switch is pressed, will return
- *      the number of that switch. 
+ * Logic sense
  **/
-int check_switches(){
-    if(s1_down) return 1;
-    else if(s2_down) return 2;
-    else if(s3_down) return 3;
-    else if(s4_down) return 4;
-    else return 0;
+void logic(char s1_state, char s2_state, char s3_state, char s4_state)
+{
+
+
+
 }
