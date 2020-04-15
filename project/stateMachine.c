@@ -10,16 +10,20 @@ void state_machine(int s){
     switch(s){
         case 1:
             state_1();
+            state = logic(s1_down,s2_down,s3_down,s4_down);
             break;
         case 2:
             state_2();
             enable_green();
+            state = logic(s1_down,s2_down,s3_down,s4_down);
             break;
         case 3:
             state_3();
+            state = logic(s1_down,s2_down,s3_down,s4_down);
             break;
         case 4:
             state_4();
+            state = logic(s1_down,s2_down,s3_down,s4_down);
             break;
         default:
             break;
@@ -62,9 +66,11 @@ void state_4(){
 /**
  * Logic sense
  **/
-void logic(char s1_state, char s2_state, char s3_state, char s4_state)
+int logic(char s1_state, char s2_state, char s3_state, char s4_state)
 {
-
-
-
+    if(s1_state) return 1;
+    else if (s2_state) return 2;
+    else if (s3_state) return 3;
+    else if (s4_state) return 4;
+    else 0;
 }
