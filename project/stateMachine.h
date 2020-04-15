@@ -1,8 +1,6 @@
 #ifndef stateMachine_included
 #define stateMachine_included
 
-extern int state;
-
-#define void state_machine();
+void state_machine(int s);
 
 #endif

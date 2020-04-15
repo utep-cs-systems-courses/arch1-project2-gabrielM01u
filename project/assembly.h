@@ -1,8 +1,8 @@
 #ifndef assembly_header
 #define assembly_header
 
-#include "switches.h"
 
-void state_machine();
+
+void state_machine(int s);
 
 #endif

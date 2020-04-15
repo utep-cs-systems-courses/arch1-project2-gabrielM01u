@@ -1,5 +1,7 @@
 	.arch msp430g2553
-	.p2align 1,0
+	.file "stateMachine.h"
+    .p2align 1,0
+
     
 
 
@@ -16,21 +18,22 @@ jt: .word default
 state_machine:
 
     cmp #4, r12
-    jnc default
-
+    jc default
+    add r12, r12
     mov jt(r12), r0
 
 case_1:
-    call &state_1
+    call #state_1
     jmp exit
 case_2:
-    call &state_2
+    call #state_2
+    call #enable_green
     jmp exit
 case_3:
-    call &state_3
+    call #state_3
     jmp exit
 case_4:
-    call &state_4
+    call #state_4
     jmp exit
 default:
     jmp exit

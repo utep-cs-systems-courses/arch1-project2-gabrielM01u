@@ -10,6 +10,7 @@ char s2_down;
 char s3_down;
 char s4_down;
 
+//initializes the switches
 void
 switch_init(){
   P2REN |= SWITCHES;

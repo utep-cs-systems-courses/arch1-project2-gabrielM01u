@@ -2,28 +2,30 @@
 #include "buzzer.h"
 #include "led.h"
 
-int state;
+/* State Machine: based on what swtich is pressed, will allow the msp430
+   to produce sounds and lights.
 
-
+   This function is called in the switch interrupt handler.
+*/
 void state_machine(int s){
     
     switch(s){
         case 1:
             state_1();
-            state = logic(s1_down,s2_down,s3_down,s4_down);
+            
             break;
         case 2:
             state_2();
             enable_green();
-            state = logic(s1_down,s2_down,s3_down,s4_down);
+            
             break;
         case 3:
             state_3();
-            state = logic(s1_down,s2_down,s3_down,s4_down);
+            
             break;
         case 4:
             state_4();
-            state = logic(s1_down,s2_down,s3_down,s4_down);
+            
             break;
         default:
             break;
@@ -32,8 +34,10 @@ void state_machine(int s){
 /**
  * States
  **/
+
+//State 1: turns green on and plays buzzer for 125 cycles, then turns everything off
 void state_1(){
-   int timer;
+   int timer = 0;
     enable_green();
     led_update();
     buzzer_set_period(2200);
@@ -43,8 +47,9 @@ void state_1(){
     led_update();
 }
 
+//State 1: turns red on and plays buzzer with a different tone for 500 cycles, then turns everything off
 void state_2(){
-    int timer;
+    int timer = 0;
     enable_red();
     led_update();
     buzzer_set_period(1400);
@@ -54,23 +59,15 @@ void state_2(){
     led_update();
 }
 
+//State 3: turns green on and buzzer for 125 cycles, turns everything off, then turns on red and buzzard for 500 cycles, then turns everything off
 void state_3(){
     state_1();
     state_2();
 }
 
+//State 4: turns red on and buzzer for 500 cycles, turns everything off, then does the same things as in State 3
 void state_4(){
     state_2();
     state_3();
 }
-/**
- * Logic sense
- **/
-int logic(char s1_state, char s2_state, char s3_state, char s4_state)
-{
-    if(s1_state) return 1;
-    else if (s2_state) return 2;
-    else if (s3_state) return 3;
-    else if (s4_state) return 4;
-    else 0;
-}
+
