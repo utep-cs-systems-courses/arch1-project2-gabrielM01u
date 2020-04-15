@@ -9,6 +9,9 @@ AS              = msp430-elf-as
 
 all: main.elf 
 
+install: 
+	(cd timerLib; make install)
+
 #additional rules for files
 main.elf: ${COMMON_OBJECTS} buzzer.o led.o switches.o main.o stateMachines.o ../lib/libTimer.a
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
@@ -17,4 +20,5 @@ load: main.elf
 	msp430loader.sh main.elf
 
 clean:
+	(cd timerLib; make clean)
 	rm -f *.o *.elf
